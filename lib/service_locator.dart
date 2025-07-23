@@ -1,6 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shartflix/core/error/dio_error_interceptor.dart';
+import 'package:shartflix/core/navigation/navigation_service.dart';
+import 'package:shartflix/core/navigation/navigation_service_impl.dart';
 import 'package:shartflix/features/auth/data/data_sources/remote/user_api_service.dart';
 import 'package:shartflix/features/auth/data/repository/user_repository_impl.dart';
 import 'package:shartflix/features/auth/domain/repository/user_repository.dart';
@@ -13,6 +15,9 @@ Future<void> initServiceLocator() async {
   // dio
   final dio = Dio();
   dio.interceptors.add(DioErrorInterceptor());
+
+  //navigation
+  sl.registerLazySingleton<NavigationService>(() => NavigationServiceImpl());
 
   // Register services...
   sl.registerSingleton<Dio>(dio);

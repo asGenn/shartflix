@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shartflix/config/theme/theme.dart';
+import 'package:shartflix/core/navigation/navigation_service.dart';
+import 'package:shartflix/core/navigation/navigation_service_impl.dart';
+import 'package:shartflix/core/navigation/route_generator.dart';
+import 'package:shartflix/core/util/constants/navigation/navigation_constants.dart';
 import 'package:shartflix/features/auth/presentation/bloc/login/login_bloc.dart';
 import 'package:shartflix/features/auth/presentation/pages/login/login_view.dart';
 import 'package:shartflix/service_locator.dart';
@@ -16,14 +20,19 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    final navigationService = sl<NavigationService>() as NavigationServiceImpl;
     return BlocProvider<LoginBloc>(
       create: (context) => sl(),
       child: MaterialApp(
-        title: 'Flutter Demo',
+        title: 'Shartflix',
+        debugShowCheckedModeBanner: false,
         theme: AppTheme.lightTheme(),
         darkTheme: AppTheme.darkTheme(),
         themeMode: ThemeMode.system,
         home: const LoginView(),
+        navigatorKey:navigationService.navigatorKey,
+        onGenerateRoute: RouteGenerator.generateRoute,
+        initialRoute: AppRoutes.login,
       ),
     );
   }
