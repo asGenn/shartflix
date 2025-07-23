@@ -43,3 +43,7 @@ class SocialLoginRequested extends LoginEvent {
   @override
   List<Object> get props => [provider];
 }
+
+class SignupRequested extends LoginEvent {
+  
+}

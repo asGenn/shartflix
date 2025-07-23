@@ -7,7 +7,9 @@ import 'package:shartflix/features/auth/data/data_sources/remote/user_api_servic
 import 'package:shartflix/features/auth/data/repository/user_repository_impl.dart';
 import 'package:shartflix/features/auth/domain/repository/user_repository.dart';
 import 'package:shartflix/features/auth/domain/usecases/login_use_case.dart';
+import 'package:shartflix/features/auth/domain/usecases/register_use_case.dart';
 import 'package:shartflix/features/auth/presentation/bloc/login/login_bloc.dart';
+import 'package:shartflix/features/auth/presentation/bloc/signup/signup_bloc.dart';
 
 final sl = GetIt.instance;
 
@@ -29,7 +31,9 @@ Future<void> initServiceLocator() async {
 
   //usecase
   sl.registerLazySingleton<LoginUseCase>(() => LoginUseCase(sl()));
+  sl.registerLazySingleton<RegisterUseCase>(() => RegisterUseCase(sl()));
 
   //bloc
-  sl.registerFactory<LoginBloc>(() => LoginBloc(sl()));
+  sl.registerFactory<LoginBloc>(() => LoginBloc(sl(), sl()));
+  sl.registerFactory<SignupBloc>(() => SignupBloc(sl(), sl()));
 }

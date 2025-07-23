@@ -1,6 +1,10 @@
+import 'dart:async';
+
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:shartflix/core/navigation/navigation_service.dart';
 import 'package:shartflix/core/resources/data_state.dart';
+import 'package:shartflix/core/util/constants/navigation/navigation_constants.dart';
 import 'package:shartflix/features/auth/data/models/login_request_model.dart';
 import 'package:shartflix/features/auth/domain/entities/user_entitiy.dart';
 import 'package:shartflix/features/auth/domain/usecases/login_use_case.dart';
@@ -10,14 +14,16 @@ part 'login_state.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   final LoginUseCase _loginUseCase;
+  final NavigationService _navigationService;
 
-  LoginBloc(this._loginUseCase) : super(LoginInitial()) {
+  LoginBloc(this._loginUseCase, this._navigationService) : super(LoginInitial()) {
     on<EmailChanged>(_onEmailChanged);
     on<PasswordChanged>(_onPasswordChanged);
     on<PasswordVisibilityToggled>(_onPasswordVisibilityToggled);
     on<FormValidationRequested>(_onFormValidationRequested);
     on<LoginButtonPressed>(_onLoginButtonPressed);
     on<SocialLoginRequested>(_onSocialLoginRequested);
+    on<SignupRequested>(_onSignupRequested);
   }
 
   void _onEmailChanged(EmailChanged event, Emitter<LoginState> emit) {
@@ -141,7 +147,6 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     );
 
     // TODO: Implement social login logic
-    // For now, just simulate a delay
     await Future.delayed(const Duration(seconds: 2));
 
     emit(
@@ -174,5 +179,9 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       return 'Şifre en az 6 karakter olmalı';
     }
     return null;
+  }
+
+  FutureOr<void> _onSignupRequested(SignupRequested event, Emitter<LoginState> emit) {
+    _navigationService.navigateAndReplace(AppRoutes.register);
   }
 }
