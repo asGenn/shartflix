@@ -118,6 +118,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
     if (result is DataSuccess && result.data != null) {
       emit(LoginSuccess(result.data!));
+      _navigationService.navigateAndReplace(AppRoutes.root);
     } else if (result is DataFailed) {
       emit(
         LoginFailure(

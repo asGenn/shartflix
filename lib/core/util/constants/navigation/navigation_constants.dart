@@ -4,5 +4,6 @@ class AppRoutes {
   static const String home = '/home';
   static const String profile = '/profile';
   static const String uploadPhoto = '/upload_photo';
+  static const String root = '/root';
   
 }

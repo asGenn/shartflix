@@ -3,6 +3,7 @@ import 'package:shartflix/core/util/constants/navigation/navigation_constants.da
 import 'package:shartflix/features/auth/presentation/pages/login/login_view.dart';
 import 'package:shartflix/features/auth/presentation/pages/signup/signup_view.dart';
 import 'package:shartflix/features/auth/presentation/pages/upload_photo/upload_view.dart';
+import 'package:shartflix/features/main/presentation/root_page.dart';
 
 
 
@@ -25,6 +26,12 @@ class RouteGenerator {
       case AppRoutes.uploadPhoto:
         return MaterialPageRoute(
           builder: (_) => const UploadPhotoView(),
+          settings: settings,
+        );
+
+      case AppRoutes.root:
+        return MaterialPageRoute(
+          builder: (_) => const RootPage(),
           settings: settings,
         );
 
