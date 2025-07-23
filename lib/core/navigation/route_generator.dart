@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shartflix/core/util/constants/navigation/navigation_constants.dart';
 import 'package:shartflix/features/auth/presentation/pages/login/login_view.dart';
 import 'package:shartflix/features/auth/presentation/pages/signup/signup_view.dart';
+import 'package:shartflix/features/auth/presentation/pages/upload_photo/upload_view.dart';
 
 
 
@@ -18,6 +19,12 @@ class RouteGenerator {
       case AppRoutes.register:
         return MaterialPageRoute(
           builder: (_) => const SignupView(),
+          settings: settings,
+        );
+
+      case AppRoutes.uploadPhoto:
+        return MaterialPageRoute(
+          builder: (_) => const UploadPhotoView(),
           settings: settings,
         );
 

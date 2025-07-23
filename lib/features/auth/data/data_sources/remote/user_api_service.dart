@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
+
 import 'package:retrofit/retrofit.dart';
 import 'package:shartflix/core/models/base_response.dart';
 import 'package:shartflix/core/util/constants/network/remote.dart';
@@ -17,4 +20,7 @@ abstract class UserApiService {
 
   @POST("user/register")
   Future<HttpResponse<BaseResponse<UserModel>>> register(@Body() RegisterRequestModel registerRequest);
+
+  @POST("user/upload_photo")
+  Future<HttpResponse<BaseResponse<UserModel>>> uploadPhoto(@Header("Authorization") String token, @Part() File file);
 }

@@ -1,15 +1,19 @@
 import 'package:dio/dio.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shartflix/core/error/dio_error_interceptor.dart';
 import 'package:shartflix/core/navigation/navigation_service.dart';
 import 'package:shartflix/core/navigation/navigation_service_impl.dart';
+import 'package:shartflix/features/auth/data/data_sources/local/secure_storage_service_impl.dart';
 import 'package:shartflix/features/auth/data/data_sources/remote/user_api_service.dart';
 import 'package:shartflix/features/auth/data/repository/user_repository_impl.dart';
 import 'package:shartflix/features/auth/domain/repository/user_repository.dart';
 import 'package:shartflix/features/auth/domain/usecases/login_use_case.dart';
 import 'package:shartflix/features/auth/domain/usecases/register_use_case.dart';
+import 'package:shartflix/features/auth/domain/usecases/upload_photo_use_case.dart';
 import 'package:shartflix/features/auth/presentation/bloc/login/login_bloc.dart';
 import 'package:shartflix/features/auth/presentation/bloc/signup/signup_bloc.dart';
+import 'package:shartflix/features/auth/presentation/bloc/upload_photo/upload_photo_bloc.dart';
 
 final sl = GetIt.instance;
 
@@ -17,6 +21,10 @@ Future<void> initServiceLocator() async {
   // dio
   final dio = Dio();
   dio.interceptors.add(DioErrorInterceptor());
+
+  // secure storage
+  sl.registerLazySingleton<FlutterSecureStorage>(() => FlutterSecureStorage());
+  sl.registerLazySingleton<SecureStorageService>(() => SecureStorageService(sl()));
 
   //navigation
   sl.registerLazySingleton<NavigationService>(() => NavigationServiceImpl());
@@ -27,13 +35,15 @@ Future<void> initServiceLocator() async {
   // dependencies
   sl.registerLazySingleton<UserApiService>(() => UserApiService(sl()));
 
-  sl.registerLazySingleton<UserRepository>(() => UserRepositoryImpl(sl()));
+  sl.registerLazySingleton<UserRepository>(() => UserRepositoryImpl(sl(), sl()));
 
   //usecase
   sl.registerLazySingleton<LoginUseCase>(() => LoginUseCase(sl()));
   sl.registerLazySingleton<RegisterUseCase>(() => RegisterUseCase(sl()));
+  sl.registerLazySingleton<UploadPhotoUseCase>(() => UploadPhotoUseCase(sl()));
 
   //bloc
   sl.registerFactory<LoginBloc>(() => LoginBloc(sl(), sl()));
   sl.registerFactory<SignupBloc>(() => SignupBloc(sl(), sl()));
+  sl.registerFactory<UploadPhotoBloc>(() => UploadPhotoBloc(sl(), ));
 }

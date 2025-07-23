@@ -10,11 +10,11 @@ class UserModel extends UserEntity {
     required super.name,
     required super.email,
     super.photoUrl,
-    required super.token,
+    super.token = "",
   });
 
   factory UserModel.fromJson(Map<String, dynamic> json) =>
       _$UserModelFromJson(json);
 
-  Map<String, dynamic> toJson() => _$UserModelToJson(this);
+  
 }

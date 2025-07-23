@@ -7,6 +7,7 @@ import 'package:shartflix/core/navigation/route_generator.dart';
 import 'package:shartflix/core/util/constants/navigation/navigation_constants.dart';
 import 'package:shartflix/features/auth/presentation/bloc/login/login_bloc.dart';
 import 'package:shartflix/features/auth/presentation/bloc/signup/signup_bloc.dart';
+import 'package:shartflix/features/auth/presentation/bloc/upload_photo/upload_photo_bloc.dart';
 import 'package:shartflix/service_locator.dart';
 
 void main() {
@@ -25,6 +26,7 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider<LoginBloc>(create: (context) => sl()),
         BlocProvider<SignupBloc>(create: (context) => sl()),
+        BlocProvider<UploadPhotoBloc>(create: (context) => sl()),
       ],
       child: MaterialApp(
         title: 'Shartflix',

@@ -229,6 +229,7 @@ class SignupBloc extends Bloc<SignupEvent, SignupState> {
 
       if (result is DataSuccess) {
         emit(SignupSuccess(result.data!));
+        _navigationService.navigateAndReplace(AppRoutes.uploadPhoto);
       } else {
         emit(
           SignupFailure(
