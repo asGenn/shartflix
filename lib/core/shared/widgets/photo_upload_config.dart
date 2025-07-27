@@ -18,19 +18,19 @@ class PhotoUploadConfig {
   });
 
   factory PhotoUploadConfig.forAuth() {
-    return const PhotoUploadConfig(
-      title: 'Fotoğraflarınızı Yükleyin',
-      subtitle: 'Resources out incentivize\nrelaxation floor loss cc.',
-      buttonText: 'Devam Et',
+    return PhotoUploadConfig(
+      title: 'profile.photo_upload.title',
+      subtitle: 'profile.photo_upload.subtitle',
+      buttonText: 'profile.photo_upload.button_text',
       showBackButton: false,
     );
   }
 
   factory PhotoUploadConfig.forProfile() {
-    return const PhotoUploadConfig(
-      title: 'Profil Fotoğrafını Güncelle',
-      subtitle: 'Profilinizi daha çekici hale getirin',
-      buttonText: 'Güncelle',
+    return PhotoUploadConfig(
+      title: 'profile.photo_upload.title',
+      subtitle: 'profile.photo_upload.subtitle',
+      buttonText: 'profile.photo_upload.button_text',
       showBackButton: true,
     );
   }

@@ -40,7 +40,15 @@
     "user": "Kullanıcı",
     "add_photo": "Fotoğraf Ekle",
     "favorite_movies": "Beğendiğim Filmler",
-    "no_favorites": "Henüz beğenilen film yok"
+    "no_favorites": "Henüz beğenilen film yok",
+    "photo_upload": {
+      "title": "Profil Fotoğrafı",
+      "subtitle": "Profil fotoğrafınızı seçin veya çekin",
+      "button_text": "Fotoğrafı Yükle",
+      "uploading": "Yükleniyor...",
+      "success_message": "Profil fotoğrafı başarıyla yüklendi",
+      "error_message": "Fotoğraf yüklenirken bir hata oluştu"
+    }
   },
   "common": {
     "loading": "Yükleniyor...",

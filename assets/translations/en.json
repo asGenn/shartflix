@@ -40,7 +40,15 @@
     "user": "User",
     "add_photo": "Add Photo",
     "favorite_movies": "My Favorite Movies",
-    "no_favorites": "No favorite movies yet"
+    "no_favorites": "No favorite movies yet",
+    "photo_upload": {
+      "title": "Profile Photo",
+      "subtitle": "Select or take your profile photo",
+      "button_text": "Upload Photo",
+      "uploading": "Uploading...",
+      "success_message": "Profile photo uploaded successfully",
+      "error_message": "An error occurred while uploading photo"
+    }
   },
   "common": {
     "loading": "Loading...",

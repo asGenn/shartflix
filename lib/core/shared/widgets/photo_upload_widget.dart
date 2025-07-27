@@ -1,10 +1,11 @@
 import 'dart:io';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shartflix/core/shared/widgets/app_snackbar.dart';
-import 'package:shartflix/features/auth/presentation/widgets/button/custom_button.dart';
 import 'package:shartflix/core/shared/widgets/photo_upload_config.dart';
+import 'package:shartflix/features/auth/presentation/widgets/button/custom_button.dart';
 
 class PhotoUploadWidget extends StatelessWidget {
   final PhotoUploadConfig config;
@@ -40,9 +41,9 @@ class PhotoUploadWidget extends StatelessWidget {
                 onPressed: config.onBackPressed ?? () => Navigator.pop(context),
               ),
               centerTitle: true,
-              title: const Text(
-                'Profil Detayı',
-                style: TextStyle(color: Colors.white, fontSize: 18),
+              title: Text(
+                'profile.title'.tr(),
+                style: const TextStyle(color: Colors.white, fontSize: 18),
               ),
             )
           : null,
@@ -52,13 +53,14 @@ class PhotoUploadWidget extends StatelessWidget {
           if (state.toString().contains('Success')) {
             AppSnackbar.show(
               context: context,
-              message: 'Profil fotoğrafı başarıyla yüklendi',
+              message: 'profile.photo_upload.success_message'.tr(),
               type: SnackBarType.success,
             );
           } else if (state.toString().contains('Error')) {
             AppSnackbar.show(
               context: context,
-              message: errorMessage ?? 'Bir hata oluştu',
+              message:
+                  errorMessage ?? 'profile.photo_upload.error_message'.tr(),
               type: SnackBarType.error,
             );
           }
@@ -69,7 +71,7 @@ class PhotoUploadWidget extends StatelessWidget {
             children: [
               const SizedBox(height: 40),
               Text(
-                config.title,
+                config.title.tr(),
                 style: const TextStyle(
                   color: Colors.white,
                   fontSize: 24,
@@ -78,7 +80,7 @@ class PhotoUploadWidget extends StatelessWidget {
               ),
               const SizedBox(height: 8),
               Text(
-                config.subtitle,
+                config.subtitle.tr(),
                 textAlign: TextAlign.center,
                 style: const TextStyle(color: Colors.grey, fontSize: 14),
               ),
@@ -103,10 +105,10 @@ class PhotoUploadWidget extends StatelessWidget {
               ),
               const Spacer(),
               CustomButton(
-                text: isLoading ? 'Yükleniyor...' : config.buttonText,
-                onPressed: isImagePicked && !isLoading && pickedImage != null
-                    ? () => onUpload(pickedImage!)
-                    : null,
+                text: isLoading
+                    ? 'profile.photo_upload.uploading'.tr()
+                    : config.buttonText.tr(),
+                onPressed: () => onUpload(pickedImage!),
                 isLoading: isLoading,
               ),
               const SizedBox(height: 40),
