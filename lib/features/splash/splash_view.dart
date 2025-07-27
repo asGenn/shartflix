@@ -29,7 +29,7 @@ class SplashView extends StatelessWidget {
               ),
               Center(
                 child: Lottie.asset(
-                  'assets/images/sinFlixLogo_anim.json',
+                  'assets/anim/sinFlixLogo_anim.json',
                   onLoaded: (composition) {
                     Future.delayed(
                       Duration(
