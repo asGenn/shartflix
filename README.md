@@ -93,29 +93,27 @@ lib/
 
 <!-- Buraya uygulama ekran görüntüleri eklenecek -->
 ### Uygulama iconu
-![App Icon](https://github.com/user-attachments/assets/b4158692-9684-41c8-92e0-c19fadc2ee73)
+![App Icon]<img src="https://github.com/user-attachments/assets/b4158692-9684-41c8-92e0-c19fadc2ee73" width=25% height=25%>
+
 
 ### Splash Ekranı
-![Splash Screen](https://github.com/user-attachments/assets/824821e8-1a04-4374-b8df-dc3e100cc3fb)
+![Splash Screen]<img src="https://github.com/user-attachments/assets/824821e8-1a04-4374-b8df-dc3e100cc3fb" width=25% height=25%>
 
 
 
 ### Giriş Ekranı
-![Login Screen](https://github.com/user-attachments/assets/5d49ec03-8467-4126-9580-74a4bf8dfe57)
 
 ### Fotoğraf Yükleme Ekranı
-![Photo upload Screen](https://github.com/user-attachments/assets/eab9e3f1-c124-4bc2-b870-f8ad75bd05cf)
+![Photo upload Screen]<img src="https://github.com/user-attachments/assets/eab9e3f1-c124-4bc2-b870-f8ad75bd05cf" width=25% height=25%>
 
 
 ### Ana Sayfa
-![Home Screen](https://github.com/user-attachments/assets/09336570-4b30-4ad2-98e3-7c8a7480177f)
-
+![Home Screen]<img src="https://github.com/user-attachments/assets/09336570-4b30-4ad2-98e3-7c8a7480177f" width=25% height=25%>
 
 ### Profil Sayfası
-![Profile Screen](https://github.com/user-attachments/assets/77930f97-9824-4944-9ad7-6e16b196d48e)
-<img src="https://github.com/user-attachments/assets/77930f97-9824-4944-9ad7-6e16b196d48e" width=50% height=50%>
+![Profile Screen]<img src="https://github.com/user-attachments/assets/77930f97-9824-4944-9ad7-6e16b196d48e" width=25% height=25%>
 ### Sınırlı Teklif
-![Limited Offer](https://github.com/user-attachments/assets/da8c52f4-6a26-41f6-8557-5ab4425c38e4)
+![Limited Offer]<img src="https://github.com/user-attachments/assets/da8c52f4-6a26-41f6-8557-5ab4425c38e4" width=25% height=25%>
 
 
 
