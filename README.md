@@ -1,3 +1,5 @@
+
+https://github.com/user-attachments/assets/824821e8-1a04-4374-b8df-dc3e100cc3fb
 # Shartflix - Flutter Case Study
 
 ## 📱 Proje Hakkında
@@ -90,23 +92,36 @@ lib/
 ## 📱 Ekran Görüntüleri
 
 <!-- Buraya uygulama ekran görüntüleri eklenecek -->
+### Uygulama iconu
+![App Icon]![Screenshot_20250727-113325_One UI Home](https://github.com/user-attachments/assets/b4158692-9684-41c8-92e0-c19fadc2ee73)
+
+### Splash Ekranı
+![Splash Screen]Uploading Screen_Recording_20250727-113758_One UI Home~2.mp4…
+
+
+
 ### Giriş Ekranı
-![Login Screen]
+![Login Screen]![Screenshot_20250727-113441](https://github.com/user-attachments/assets/5d49ec03-8467-4126-9580-74a4bf8dfe57)
+
+### Fotoğraf Yükleme Ekranı
+![Photo upload Screen]![Screenshot_20250727-112733](https://github.com/user-attachments/assets/eab9e3f1-c124-4bc2-b870-f8ad75bd05cf)
+
 
 ### Ana Sayfa
-![Home Screen]
+![Home Screen]![Screenshot_20250727-112733](https://github.com/user-attachments/assets/09336570-4b30-4ad2-98e3-7c8a7480177f)
 
-### Film Detayları
-![Movie Details]
 
 ### Profil Sayfası
-![Profile Screen]
+![Profile Screen]![Screenshot_20250727-112343](https://github.com/user-attachments/assets/77930f97-9824-4944-9ad7-6e16b196d48e)
+### Sınırlı Teklif
+![Limited Offer]![Screenshot_20250727-113207](https://github.com/user-attachments/assets/da8c52f4-6a26-41f6-8557-5ab4425c38e4)
+
+
 
 ## 🎬 Animasyonlar
-
-<!-- Buraya uygulama animasyonları eklenecek -->
 ### Splash Animasyonu
-![Splash Animation](animations/splash_animation.gif)
+![Splash Animation]![6a19ca2e-4a66-44b1-a395-3fd85d480556](https://github.com/user-attachments/assets/a7e797bd-e787-4db0-8a8f-86b2d86b2c7d)
+
 
 
 
