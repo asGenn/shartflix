@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class CustomTextField extends StatelessWidget {
   final String? initialValue;
   final String hintText;
-  final IconData prefixIcon;
+
+  final String prefixSvgPath;
   final bool obscureText;
   final Widget? suffixIcon;
   final TextInputType? keyboardType;
@@ -16,7 +18,7 @@ class CustomTextField extends StatelessWidget {
     super.key,
     this.initialValue,
     required this.hintText,
-    required this.prefixIcon,
+    required this.prefixSvgPath,
     this.obscureText = false,
     this.suffixIcon,
     this.keyboardType,
@@ -28,15 +30,18 @@ class CustomTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    final textTheme = Theme.of(context).textTheme;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
           decoration: BoxDecoration(
-            color: const Color(0xff1a1a1a),
+            color: colorScheme.surface,
             borderRadius: BorderRadius.circular(18),
             border: Border.all(
-              color: Colors.white.withValues(alpha: 0.2),
+              color: colorScheme.onSurface.withValues(alpha: 0.2),
               width: 1,
             ),
           ),
@@ -46,17 +51,26 @@ class CustomTextField extends StatelessWidget {
             obscureText: obscureText,
             keyboardType: keyboardType,
             enabled: enabled,
-            style: TextStyle(
-              color: enabled ? Colors.white : const Color(0xff8C8C8C),
+            style: textTheme.bodyLarge?.copyWith(
+              color: enabled
+                  ? colorScheme.onSurface
+                  : colorScheme.onSurface.withValues(alpha: 0.6),
               fontSize: 16,
             ),
             decoration: InputDecoration(
               hintText: hintText,
-              hintStyle: const TextStyle(
-                color: Color(0xff8C8C8C),
-                fontSize: 16,
+              hintStyle: textTheme.bodyMedium?.copyWith(fontSize: 16),
+              prefixIcon: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: SvgPicture.asset(
+                  prefixSvgPath,
+
+                  colorFilter: ColorFilter.mode(
+                    colorScheme.onSurface.withValues(alpha: 0.6),
+                    BlendMode.srcIn,
+                  ),
+                ),
               ),
-              prefixIcon: Icon(prefixIcon, color: const Color(0xff8C8C8C)),
               suffixIcon: suffixIcon,
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(18),
@@ -66,9 +80,6 @@ class CustomTextField extends StatelessWidget {
                 horizontal: 16,
                 vertical: 16,
               ),
-              // Error border'ı InputDecoration'da göstermiyoruz
-              // çünkü Container'da border ile gösteriyoruz
-              errorStyle: const TextStyle(height: 0),
             ),
             validator: validator,
           ),

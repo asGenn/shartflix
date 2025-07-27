@@ -9,24 +9,27 @@ class AuthTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+    final colorScheme = Theme.of(context).colorScheme;
+
     return Column(
       children: [
         Text(
           title,
-          style: const TextStyle(
-            fontSize: 28,
+          style: textTheme.headlineLarge?.copyWith(
+            fontSize: 18,
             fontWeight: FontWeight.bold,
-            color: Colors.white,
+            color: colorScheme.onSurface,
           ),
         ),
         const SizedBox(height: 12),
         Text(
           subtitle,
           textAlign: TextAlign.center,
-          style: const TextStyle(
-            fontSize: 16,
-            color: Color(0xff8C8C8C),
-            height: 1.5,
+          style: textTheme.bodyMedium?.copyWith(
+            fontSize: 13,
+            color: colorScheme.onSurface,
+            
           ),
         ),
       ],

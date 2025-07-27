@@ -1,4 +1,1 @@
 const String baseUrl = 'https://caseapi.servicelabs.tech/';
-
-const String authToken =
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2JjOGQ1OGQ5ZWM0ZDQwMDQwYjgxYjYiLCJpZCI6IjY3YmM4ZDU4ZDllYzRkNDAwNDBiODFiNiIsIm5hbWUiOiJzYWZhIiwiaWF0IjoxNzUzMjE5Mjg2LCJleHAiOjQ4NjM2MTkyODZ9.LzHht7OeRdLijo3FyT0NFclbnjDu1MVFf1Zv_QhGQL4';

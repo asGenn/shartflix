@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
+import '../../../../core/util/helpers/image_helper.dart';
 import '../../domain/entities/movie_entity.dart';
 
 class SwipeableMovieCard extends StatelessWidget {
@@ -12,49 +14,80 @@ class SwipeableMovieCard extends StatelessWidget {
     required this.onFavoriteToggle,
   });
 
-  bool _isValidUrl(String url) {
-    if (url.isEmpty) return false;
-    try {
-      final uri = Uri.parse(url);
-      return uri.hasScheme && (uri.scheme == 'http' || uri.scheme == 'https');
-    } catch (e) {
-      return false;
-    }
-  }
+  Widget _buildTextWithCustomOverflow(
+    String text,
+    TextStyle style, {
+    int maxLines = 2,
+  }) {
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final textSpan = TextSpan(text: text, style: style);
+        final textPainter = TextPainter(
+          text: textSpan,
+          textDirection: TextDirection.ltr,
+          maxLines: maxLines,
+        );
+        textPainter.layout(maxWidth: constraints.maxWidth);
 
-  String _convertToHttps(String url) {
-    if (url.startsWith('http://')) {
-      return url.replaceFirst('http://', 'https://');
-    }
-    return url;
-  }
+        if (textPainter.didExceedMaxLines) {
+          final suffix = ' Daha Fazlası';
+          final suffixSpan = TextSpan(
+            text: suffix,
+            style: style.copyWith(
+              color: Theme.of(context).colorScheme.onSurface,
+              fontWeight: FontWeight.w700,
+              fontSize: 13,
+            ),
+          );
 
-  Map<String, String> _getHeaders() {
-    return {
-      'User-Agent':
-          'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
-      'Referer': 'https://www.imdb.com/',
-    };
+          String truncatedText = text;
+          while (textPainter.didExceedMaxLines && truncatedText.isNotEmpty) {
+            truncatedText = truncatedText.substring(
+              0,
+              truncatedText.length - 1,
+            );
+            final newTextSpan = TextSpan(
+              text: truncatedText + suffix,
+              children: [suffixSpan],
+            );
+            textPainter.text = newTextSpan;
+            textPainter.layout(maxWidth: constraints.maxWidth);
+          }
+
+          return RichText(
+            text: TextSpan(
+              text: truncatedText,
+              style: style,
+              children: [suffixSpan],
+            ),
+            maxLines: maxLines,
+            overflow: TextOverflow.visible,
+          );
+        } else {
+          return Text(text, style: style, maxLines: maxLines);
+        }
+      },
+    );
   }
 
   Widget _buildNetworkImage(String url) {
-    final httpsUrl = _convertToHttps(url);
+    final httpsUrl = ImageHelper.convertToHttps(url);
 
     return Image.network(
-      httpsUrl,
+      httpsUrl!,
       fit: BoxFit.cover,
-      headers: _getHeaders(),
+
       errorBuilder: (context, error, stackTrace) {
-        print('Image error for ${movie.title}: $error');
-        print('Failed URL: $httpsUrl');
         return _buildFallbackImage();
       },
       loadingBuilder: (context, child, loadingProgress) {
         if (loadingProgress == null) return child;
         return Container(
           color: Colors.grey[900],
-          child: const Center(
-            child: CircularProgressIndicator(color: Colors.red),
+          child: Center(
+            child: CircularProgressIndicator(
+              color: Theme.of(context).colorScheme.onSurfaceVariant,
+            ),
           ),
         );
       },
@@ -63,13 +96,13 @@ class SwipeableMovieCard extends StatelessWidget {
 
   Widget _buildImage() {
     // Önce poster URL'ini kontrol et
-    if (_isValidUrl(movie.poster)) {
+    if (ImageHelper.isValidImageUrl(movie.poster)) {
       return _buildNetworkImage(movie.poster);
     }
 
     // Images listesinden alternatif resim dene
     for (String imageUrl in movie.images) {
-      if (_isValidUrl(imageUrl)) {
+      if (ImageHelper.isValidImageUrl(imageUrl)) {
         return _buildNetworkImage(imageUrl);
       }
     }
@@ -122,156 +155,91 @@ class SwipeableMovieCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final mediaQuery = MediaQuery.of(context);
     return Stack(
       fit: StackFit.expand,
       children: [
-        // Arka plan film posteri
         _buildImage(),
 
-        // Gradient overlay
-        Container(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: [
-                Colors.transparent,
-                Colors.transparent,
-                Colors.black.withOpacity(0.3),
-                Colors.black.withOpacity(0.8),
-              ],
-              stops: const [0.0, 0.4, 0.7, 1.0],
-            ),
-          ),
-        ),
-
-        // Top right favorite button
         Positioned(
-          top: MediaQuery.of(context).padding.top + 16,
-          right: 16,
+          bottom: mediaQuery.padding.bottom + 120,
+          right: 20,
           child: GestureDetector(
             onTap: onFavoriteToggle,
             child: Container(
+              height: 70,
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: Colors.black.withOpacity(0.5),
+                shape: BoxShape.rectangle,
+                borderRadius: BorderRadius.all(Radius.circular(82)),
+                color: Colors.black.withValues(alpha: 0.6),
+                border: Border.all(
+                  style: BorderStyle.solid,
+                  color: Theme.of(
+                    context,
+                  ).colorScheme.onSurface.withValues(alpha: 0.5),
+                  width: 2,
+                ),
               ),
               child: Icon(
                 movie.isFavorite ? Icons.favorite : Icons.favorite_border,
                 color: movie.isFavorite ? Colors.red : Colors.white,
-                size: 28,
+                size: 24,
               ),
             ),
           ),
         ),
 
-        // Film bilgileri - alt kısım
         Positioned(
           bottom: 0,
           left: 0,
           right: 0,
           child: Container(
             padding: EdgeInsets.fromLTRB(
-              20,
-              40,
-              20,
-              MediaQuery.of(context).padding.bottom + 100,
+              mediaQuery.size.height * 0.05,
+              mediaQuery.size.width * 0.02,
+              mediaQuery.size.width * 0.1,
+              mediaQuery.padding.bottom + 20,
             ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
+            child: Row(
               children: [
-                // Film başlığı
-                Text(
-                  movie.title,
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 32,
-                    fontWeight: FontWeight.bold,
-                    height: 1.2,
+                SvgPicture.asset(
+                  'assets/images/sin_icon.svg',
+                  width: 40,
+                  height: 40,
+                ),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      _buildTextWithCustomOverflow(
+                        movie.title,
+                        Theme.of(context).textTheme.titleLarge?.copyWith(
+                              color: Theme.of(context).colorScheme.onSurface,
+                              fontWeight: FontWeight.bold,
+                            ) ??
+                            const TextStyle(),
+                        maxLines: 1,
+                      ),
+                      const SizedBox(height: 2),
+
+                      _buildTextWithCustomOverflow(
+                        movie.plot,
+                        Theme.of(context).textTheme.bodyMedium?.copyWith(
+                              color: Theme.of(
+                                context,
+                              ).colorScheme.onSurface.withValues(alpha: 0.9),
+                              fontSize: 12,
+                              fontWeight: FontWeight.w400,
+                            ) ??
+                            const TextStyle(),
+                        maxLines: 2,
+                      ),
+                      SizedBox(height: mediaQuery.size.height * 0.01),
+                    ],
                   ),
-                ),
-                const SizedBox(height: 8),
-
-                // Yıl ve süre
-                Row(
-                  children: [
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 8,
-                        vertical: 4,
-                      ),
-                      decoration: BoxDecoration(
-                        color: Colors.red,
-                        borderRadius: BorderRadius.circular(4),
-                      ),
-                      child: Text(
-                        movie.rated,
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 12,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                    const SizedBox(width: 12),
-                    Text(
-                      movie.year,
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                    const SizedBox(width: 12),
-                    Text(
-                      movie.runtime,
-                      style: TextStyle(color: Colors.grey[300], fontSize: 16),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 12),
-
-                // IMDb puanı
-                Row(
-                  children: [
-                    const Icon(Icons.star, color: Colors.amber, size: 20),
-                    const SizedBox(width: 6),
-                    Text(
-                      movie.imdbRating,
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    const SizedBox(width: 8),
-                    Text(
-                      '(${movie.imdbVotes} oy)',
-                      style: TextStyle(color: Colors.grey[300], fontSize: 14),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 16),
-
-                // Film özeti
-                Text(
-                  movie.plot,
-                  style: TextStyle(
-                    color: Colors.grey[200],
-                    fontSize: 16,
-                    height: 1.4,
-                  ),
-                  maxLines: 3,
-                  overflow: TextOverflow.ellipsis,
-                ),
-                const SizedBox(height: 12),
-
-                // Türler
-                Text(
-                  movie.genre,
-                  style: TextStyle(color: Colors.grey[400], fontSize: 14),
                 ),
               ],
             ),

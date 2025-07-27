@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:shartflix/core/navigation/navigation_service.dart';
+import 'package:shartflix/config/navigation/navigation_service.dart';
 import 'package:shartflix/core/resources/data_state.dart';
 import 'package:shartflix/core/util/constants/navigation/navigation_constants.dart';
 import 'package:shartflix/features/auth/data/models/register_request_model.dart';

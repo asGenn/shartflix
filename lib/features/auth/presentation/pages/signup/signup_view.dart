@@ -1,9 +1,11 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shartflix/core/widgets/app_snackbar.dart';
+import 'package:shartflix/core/shared/widgets/app_snackbar.dart';
 import 'package:shartflix/features/auth/presentation/bloc/signup/signup_bloc.dart';
 import 'package:shartflix/features/auth/presentation/widgets/button/custom_button.dart';
+import 'package:shartflix/features/auth/presentation/widgets/button/custom_text_button.dart';
 import 'package:shartflix/features/auth/presentation/widgets/button/password_visibility_toggle.dart';
 import 'package:shartflix/features/auth/presentation/widgets/button/social_button.dart';
 import 'package:shartflix/features/auth/presentation/widgets/form/custom_text_field.dart';
@@ -27,7 +29,7 @@ class SignupView extends StatelessWidget {
             if (state is SignupSuccess) {
               AppSnackbar.show(
                 context: context,
-                message: 'Kayıt işlemi başarılı!',
+                message: 'auth.signup.signup_success'.tr(),
                 type: SnackBarType.success,
               );
 
@@ -35,36 +37,41 @@ class SignupView extends StatelessWidget {
             } else if (state is SignupFailure) {
               AppSnackbar.show(
                 context: context,
-                message: state.errorMessage ?? 'Kayıt işlemi başarısız!',
+                message: state.errorMessage ?? 'auth.signup.signup_failed'.tr(),
                 type: SnackBarType.error,
               );
             }
           },
           builder: (context, state) {
+            final mediaQuery = MediaQuery.of(context).size;
             return SafeArea(
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                padding: EdgeInsets.fromLTRB(
+                  mediaQuery.width * 0.08,
+                  mediaQuery.height * 0,
+                  mediaQuery.width * 0.08,
+                  mediaQuery.height * 0.01,
+                ),
                 child: Column(
                   children: [
                     Expanded(
                       child: Center(
                         child: SingleChildScrollView(
                           child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
+                              SizedBox(height: mediaQuery.height * 0.08),
                               // Title ve Subtitle
-                              const AuthTitle(
-                                title: 'Hoşgeldiniz',
-                                subtitle:
-                                    'Tempus varius a vitae interdum id\ntortor elementum tristique eleifend at.',
+                              AuthTitle(
+                                title: 'auth.signup.title'.tr(),
+                                subtitle: 'auth.signup.subtitle'.tr(),
                               ),
-                              const SizedBox(height: 48),
+                              SizedBox(height: mediaQuery.height * 0.04),
 
                               // Name Field
                               CustomTextField(
                                 initialValue: state.name,
-                                hintText: 'Ad Soyad',
-                                prefixIcon: Icons.person_outline,
+                                hintText: 'auth.signup.name'.tr(),
+                                prefixSvgPath: 'assets/images/Add-User.svg',
                                 keyboardType: TextInputType.name,
                                 errorText: state.nameError,
                                 onChanged: (value) {
@@ -73,13 +80,13 @@ class SignupView extends StatelessWidget {
                                   );
                                 },
                               ),
-                              const SizedBox(height: 16),
+                              SizedBox(height: mediaQuery.height * 0.015),
 
                               // Email Field
                               CustomTextField(
                                 initialValue: state.email,
-                                hintText: 'E-Posta',
-                                prefixIcon: Icons.email_outlined,
+                                hintText: 'auth.signup.email'.tr(),
+                                prefixSvgPath: 'assets/images/Message.svg',
                                 keyboardType: TextInputType.emailAddress,
                                 errorText: state.emailError,
                                 onChanged: (value) {
@@ -88,13 +95,13 @@ class SignupView extends StatelessWidget {
                                   );
                                 },
                               ),
-                              const SizedBox(height: 16),
+                              SizedBox(height: mediaQuery.height * 0.015),
 
                               // Password Field
                               CustomTextField(
                                 initialValue: state.password,
-                                hintText: 'Şifre',
-                                prefixIcon: Icons.lock_outline,
+                                hintText: 'auth.signup.password'.tr(),
+                                prefixSvgPath: 'assets/images/Unlock.svg',
                                 obscureText: !state.isPasswordVisible,
                                 errorText: state.passwordError,
                                 onChanged: (value) {
@@ -111,13 +118,13 @@ class SignupView extends StatelessWidget {
                                   },
                                 ),
                               ),
-                              const SizedBox(height: 16),
+                              SizedBox(height: mediaQuery.height * 0.015),
 
                               // Confirm Password Field
                               CustomTextField(
                                 initialValue: state.confirmPassword,
-                                hintText: 'Şifre Tekrar',
-                                prefixIcon: Icons.lock_outline,
+                                hintText: 'auth.signup.confirm_password'.tr(),
+                                prefixSvgPath: 'assets/images/Unlock.svg',
                                 obscureText: !state.isConfirmPasswordVisible,
                                 errorText: state.confirmPasswordError,
                                 onChanged: (value) {
@@ -134,40 +141,44 @@ class SignupView extends StatelessWidget {
                                   },
                                 ),
                               ),
-                              const SizedBox(height: 24),
+                              SizedBox(height: mediaQuery.height * 0.015),
 
                               // Terms and Privacy Text
                               RichText(
                                 textAlign: TextAlign.center,
                                 text: TextSpan(
-                                  style: const TextStyle(
-                                    color: Color(0xff8C8C8C),
-                                    fontSize: 14,
+                                  style: TextStyle(
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .onSurface
+                                        .withValues(alpha: 0.6),
+                                    fontSize: 12,
                                     height: 1.5,
                                   ),
                                   children: [
-                                    const TextSpan(
-                                      text: 'Kullanıcı sözleşmesini ',
+                                    TextSpan(
+                                      text: 'auth.signup.terms_text'.tr(),
                                     ),
                                     TextSpan(
-                                      text: 'okudum ve kabul ediyorum',
-                                      style: const TextStyle(
-                                        color: Colors.white,
+                                      text: 'auth.signup.terms_link'.tr(),
+                                      style: TextStyle(
                                         decoration: TextDecoration.underline,
+                                        color: Theme.of(
+                                          context,
+                                        ).colorScheme.onSurface,
                                       ),
                                     ),
-                                    const TextSpan(
-                                      text:
-                                          '. Bu sözleşmeyi okuyarak devam ediniz lütfen.',
+                                    TextSpan(
+                                      text: 'auth.signup.terms_end'.tr(),
                                     ),
                                   ],
                                 ),
                               ),
-                              const SizedBox(height: 32),
+                              SizedBox(height: mediaQuery.height * 0.02),
 
                               // Signup Button
                               CustomButton(
-                                text: 'Şimdi Kaydol',
+                                text: 'auth.signup.signup_button'.tr(),
                                 isLoading: state is SignupLoading,
                                 onPressed: () {
                                   context.read<SignupBloc>().add(
@@ -180,14 +191,14 @@ class SignupView extends StatelessWidget {
                                   );
                                 },
                               ),
-                              const SizedBox(height: 32),
+                              SizedBox(height: mediaQuery.height * 0.02),
 
                               // Social Signup Buttons
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   SocialButton(
-                                    icon: Icons.g_mobiledata,
+                                    iconSvgPath: 'assets/images/google.svg',
                                     onPressed: () {
                                       context.read<SignupBloc>().add(
                                         const SocialSignupRequested('google'),
@@ -196,7 +207,7 @@ class SignupView extends StatelessWidget {
                                   ),
                                   const SizedBox(width: 8.44),
                                   SocialButton(
-                                    icon: Icons.apple,
+                                    iconSvgPath: 'assets/images/apple.svg',
                                     onPressed: () {
                                       context.read<SignupBloc>().add(
                                         const SocialSignupRequested('apple'),
@@ -205,7 +216,7 @@ class SignupView extends StatelessWidget {
                                   ),
                                   const SizedBox(width: 8.44),
                                   SocialButton(
-                                    icon: Icons.facebook,
+                                    iconSvgPath: 'assets/images/facebook.svg',
                                     onPressed: () {
                                       context.read<SignupBloc>().add(
                                         const SocialSignupRequested('facebook'),
@@ -219,35 +230,12 @@ class SignupView extends StatelessWidget {
                         ),
                       ),
                     ),
-
-                    // Login Link
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 24),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          const Text(
-                            'Zaten bir hesabın var mı? ',
-                            style: TextStyle(
-                              color: Color(0xff8C8C8C),
-                              fontSize: 16,
-                            ),
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              context.read<SignupBloc>().add(LoginRequested());
-                            },
-                            child: const Text(
-                              'Giriş Yap!',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
+                    CustomTextButton(
+                      firstText: '${'auth.signup.has_account'.tr()} ',
+                      secondText: 'auth.signup.login_link'.tr(),
+                      onSignUpPressed: () {
+                        context.read<SignupBloc>().add(LoginRequested());
+                      },
                     ),
                   ],
                 ),

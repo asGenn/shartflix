@@ -39,7 +39,6 @@ class UploadPhotoBloc extends Bloc<UploadPhotoEvent, UploadPhotoState> {
     emit(UploadPhotoLoading());
 
     final dataState = await _uploadPhotoUseCase(event.imageFile);
-    print(dataState);
 
     if (dataState is DataSuccess && dataState.data != null) {
       emit(UploadPhotoSuccess(dataState.data!));

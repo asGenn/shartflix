@@ -1,0 +1,60 @@
+{
+  "auth": {
+    "login": {
+      "title": "Merhabalar",
+      "subtitle": "Tempus varius a vitae interdum id\ntortor elementum tristique eleifend at.",
+      "email": "E-Posta",
+      "password": "Şifre",
+      "forgot_password": "Şifremi Unuttum",
+      "login_button": "Giriş Yap",
+      "welcome_message": "Hoş geldin {name}!",
+      "login_failed": "Giriş başarısız!",
+      "no_account": "Bir hesabın yok mu?",
+      "signup_link": "Kayıt Ol!"
+    },
+    "signup": {
+      "title": "Hoşgeldiniz",
+      "subtitle": "Tempus varius a vitae interdum id\ntortor elementum tristique eleifend at.",
+      "name": "Ad Soyad",
+      "email": "E-Posta",
+      "password": "Şifre",
+      "confirm_password": "Şifre Tekrar",
+      "terms_text": "Kullanıcı sözleşmesini ",
+      "terms_link": "okudum ve kabul ediyorum",
+      "terms_end": ". Bu sözleşmeyi okuyarak devam ediniz lütfen.",
+      "signup_button": "Şimdi Kaydol",
+      "signup_success": "Kayıt işlemi başarılı!",
+      "signup_failed": "Kayıt işlemi başarısız!",
+      "has_account": "Zaten bir hesabın var mı?",
+      "login_link": "Giriş Yap!"
+    }
+  },
+  "home": {
+    "loading": "Yükleniyor...",
+    "error": "Hata oluştu",
+    "retry": "Tekrar Dene"
+  },
+  "profile": {
+    "title": "Profil Detayı",
+    "limited_offer": "Sınırlı Teklif",
+    "user": "Kullanıcı",
+    "add_photo": "Fotoğraf Ekle",
+    "favorite_movies": "Beğendiğim Filmler",
+    "no_favorites": "Henüz beğenilen film yok"
+  },
+  "common": {
+    "loading": "Yükleniyor...",
+    "error": "Hata",
+    "success": "Başarılı",
+    "cancel": "İptal",
+    "save": "Kaydet",
+    "delete": "Sil",
+    "edit": "Düzenle",
+    "back": "Geri",
+    "user": "Kullanıcı"
+  },
+  "errors": {
+    "invalid_credentials": "Email veya şifre hatalı",
+    "general_error": "Bir hata oluştu, lütfen tekrar deneyin"
+  }
+}

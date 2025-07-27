@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class ForgotPasswordButton extends StatelessWidget {
@@ -7,18 +8,22 @@ class ForgotPasswordButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    final textTheme = Theme.of(context).textTheme;
+
     return Align(
       alignment: Alignment.centerLeft,
       child: TextButton(
         onPressed: onPressed,
         style: TextButton.styleFrom(padding: EdgeInsets.zero),
-        child: const Text(
-          'Şifremi unuttum',
-          style: TextStyle(
-            color: Color(0xff8C8C8C),
-            fontSize: 14,
+        child: Text(
+          'auth.login.forgot_password'.tr(),
+          style: textTheme.labelMedium?.copyWith(
+            fontSize: 12,
+            color: colorScheme.onSurface.withValues(alpha: 0.9),
             decoration: TextDecoration.underline,
-            decorationColor: Color(0xff8C8C8C),
+            decorationColor: colorScheme.onSurface.withValues(alpha: 0.9),
+            decorationThickness: 1,
           ),
         ),
       ),

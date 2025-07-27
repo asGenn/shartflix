@@ -22,28 +22,38 @@ class HomeLoaded extends HomeState {
   final bool hasReachedMax;
   final int currentPage;
   final bool isLoadingMore;
+  final int currentIndex;
 
   const HomeLoaded({
     required this.movies,
     required this.hasReachedMax,
     required this.currentPage,
     this.isLoadingMore = false,
+    this.currentIndex = 0,
   });
 
   @override
-  List<Object> get props => [movies, hasReachedMax, currentPage, isLoadingMore];
+  List<Object> get props => [
+    movies,
+    hasReachedMax,
+    currentPage,
+    isLoadingMore,
+    currentIndex,
+  ];
 
   HomeLoaded copyWith({
     List<MovieEntity>? movies,
     bool? hasReachedMax,
     int? currentPage,
     bool? isLoadingMore,
+    int? currentIndex,
   }) {
     return HomeLoaded(
       movies: movies ?? this.movies,
       hasReachedMax: hasReachedMax ?? this.hasReachedMax,
       currentPage: currentPage ?? this.currentPage,
       isLoadingMore: isLoadingMore ?? this.isLoadingMore,
+      currentIndex: currentIndex ?? this.currentIndex,
     );
   }
 }

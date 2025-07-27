@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 
-import '../../../../core/models/base_response.dart';
+import '../../../../core/shared/models/base_response.dart';
 import '../../domain/entities/movies_response_entity.dart';
 import 'movie_model.dart';
 import 'pagination_model.dart';

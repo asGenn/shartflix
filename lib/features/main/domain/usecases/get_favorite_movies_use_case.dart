@@ -1,5 +1,5 @@
 import '../../../../core/resources/data_state.dart';
-import '../../../../core/usecase/usecase.dart';
+import '../../../../core/shared/usecase/usecase.dart';
 import '../entities/movie_entity.dart';
 import '../repository/movie_repository.dart';
 

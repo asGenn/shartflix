@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:shartflix/core/error/error_type.dart';
 
 class ErrorHandler {
@@ -20,17 +21,15 @@ class ErrorHandler {
 
   static AppError _handleDioError(DioException error) {
     switch (error.type) {
-      
       case DioExceptionType.badResponse:
         return _handleHttpError(error);
-
 
       case DioExceptionType.unknown:
       default:
         if (error.message?.contains('SocketException') == true) {
           return AppError(
             type: ErrorType.noInternetConnection,
-            message: _getErrorMessage(ErrorType.noInternetConnection),
+            message: 'errors.network_error'.tr(),
           );
         }
         return AppError(
@@ -45,13 +44,14 @@ class ErrorHandler {
     final statusCode = error.response?.statusCode;
     final responseData = error.response?.data;
 
-    
     String? serverMessage;
     if (responseData is Map<String, dynamic>) {
-      serverMessage =
+      final rawMessage =
+          responseData['response']?['message'] ??
           responseData['message'] ??
-          responseData['error'] ??
-          responseData['response']?['message'];
+          responseData['error'];
+
+      serverMessage = _translateServerMessage(rawMessage);
     }
 
     switch (statusCode) {
@@ -59,18 +59,14 @@ class ErrorHandler {
         return AppError(
           type: ErrorType.invalidCredentials,
           message:
-               _getErrorMessage(ErrorType.invalidCredentials),
+              serverMessage ?? _getErrorMessage(ErrorType.invalidCredentials),
           statusCode: statusCode,
         );
-
-      
-
-     
 
       default:
         return AppError(
           type: ErrorType.unknown,
-          message: serverMessage ?? _getErrorMessage(ErrorType.unknown),
+          message: _getErrorMessage(ErrorType.unknown),
           statusCode: statusCode,
         );
     }
@@ -78,12 +74,22 @@ class ErrorHandler {
 
   static String _getErrorMessage(ErrorType errorType) {
     switch (errorType) {
-      
       case ErrorType.invalidCredentials:
-        return 'Email veya şifre hatalı';
+        return 'errors.invalid_credentials'.tr();
       case ErrorType.unknown:
       default:
-        return 'Bilinmeyen bir hata oluştu';
+        return 'errors.unknown_error'.tr();
+    }
+  }
+
+  static String _translateServerMessage(String? rawMessage) {
+    if (rawMessage == null) return 'errors.unknown_error'.tr();
+
+    switch (rawMessage.toUpperCase()) {
+      case 'INVALID_CREDENTIALS':
+        return 'errors.invalid_credentials'.tr();
+      default:
+        return 'errors.general_error'.tr();
     }
   }
 }

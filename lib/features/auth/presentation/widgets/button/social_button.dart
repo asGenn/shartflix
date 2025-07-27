@@ -1,24 +1,36 @@
-
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 class SocialButton extends StatelessWidget {
-  final IconData icon;
+  final String iconSvgPath;
   final VoidCallback onPressed;
 
-  const SocialButton({super.key, required this.icon, required this.onPressed});
+  const SocialButton({super.key, required this.iconSvgPath, required this.onPressed});
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
     return Container(
-      width: 56,
-      height: 56,
+      width: 60,
+      height: 60,
       decoration: BoxDecoration(
-        color: const Color(0xff1a1a1a),
-        borderRadius: BorderRadius.circular(16),
+        color: colorScheme.surface,
+        borderRadius: BorderRadius.circular(18),
+        border: Border.all(
+          color: colorScheme.onSurface.withValues(alpha: 0.2),
+          width: 1,
+        ),
       ),
       child: IconButton(
         onPressed: onPressed,
-        icon: Icon(icon, color: Colors.white, size: 24),
+        icon: SvgPicture.asset(
+          iconSvgPath,
+          colorFilter: ColorFilter.mode(
+            colorScheme.onSurface,
+            BlendMode.srcIn,
+          ),
+        ),
       ),
     );
   }

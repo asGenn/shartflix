@@ -5,7 +5,7 @@ import '../../../auth/data/data_sources/local/secure_storage_service.dart';
 import '../../domain/entities/movie_entity.dart';
 import '../../domain/entities/movies_response_entity.dart';
 import '../../domain/repository/movie_repository.dart';
-import '../datasources/remote/movie_api_service.dart';
+import '../data_sources/remote/movie_api_service.dart';
 
 class MovieRepositoryImpl extends MovieRepository {
   final MovieApiService _movieApiService;

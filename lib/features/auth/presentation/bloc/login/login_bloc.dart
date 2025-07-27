@@ -2,7 +2,8 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:shartflix/core/navigation/navigation_service.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:shartflix/config/navigation/navigation_service.dart';
 import 'package:shartflix/core/resources/data_state.dart';
 import 'package:shartflix/core/util/constants/navigation/navigation_constants.dart';
 import 'package:shartflix/features/auth/data/models/login_request_model.dart';
@@ -15,8 +16,10 @@ part 'login_state.dart';
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   final LoginUseCase _loginUseCase;
   final NavigationService _navigationService;
+  final FirebaseAnalytics analytics = FirebaseAnalytics.instance;
 
-  LoginBloc(this._loginUseCase, this._navigationService) : super(LoginInitial()) {
+  LoginBloc(this._loginUseCase, this._navigationService)
+    : super(LoginInitial()) {
     on<EmailChanged>(_onEmailChanged);
     on<PasswordChanged>(_onPasswordChanged);
     on<PasswordVisibilityToggled>(_onPasswordVisibilityToggled);
@@ -96,11 +99,14 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     );
   }
 
- 
- Future<void> _onLoginButtonPressed(
+  Future<void> _onLoginButtonPressed(
     LoginButtonPressed event,
     Emitter<LoginState> emit,
   ) async {
+    await analytics.logEvent(
+      name: 'login_button_pressed',
+      parameters: {'email': event.email, 'password': event.password},
+    );
     emit(
       LoginLoading(
         email: state.email,
@@ -182,7 +188,10 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     return null;
   }
 
-  FutureOr<void> _onSignupRequested(SignupRequested event, Emitter<LoginState> emit) {
+  FutureOr<void> _onSignupRequested(
+    SignupRequested event,
+    Emitter<LoginState> emit,
+  ) {
     _navigationService.navigateAndReplace(AppRoutes.register);
   }
 }

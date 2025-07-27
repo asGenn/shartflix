@@ -80,4 +80,33 @@ class MovieEntity extends Equatable {
     comingSoon,
     isFavorite,
   ];
+
+  MovieEntity copyWithFavorite(bool isFavorite) {
+    return MovieEntity(
+      id: id,
+      title: title,
+      year: year,
+      rated: rated,
+      released: released,
+      runtime: runtime,
+      genre: genre,
+      director: director,
+      writer: writer,
+      actors: actors,
+      plot: plot,
+      language: language,
+      country: country,
+      awards: awards,
+      poster: poster,
+      metascore: metascore,
+      imdbRating: imdbRating,
+      imdbVotes: imdbVotes,
+      imdbID: imdbID,
+      type: type,
+      response: response,
+      images: images,
+      comingSoon: comingSoon,
+      isFavorite: isFavorite,
+    );
+  }
 }

@@ -1,0 +1,60 @@
+{
+  "auth": {
+    "login": {
+      "title": "Hello",
+      "subtitle": "Tempus varius a vitae interdum id\ntortor elementum tristique eleifend at.",
+      "email": "Email",
+      "password": "Password",
+      "forgot_password": "Forgot Password",
+      "login_button": "Login",
+      "welcome_message": "Welcome {name}!",
+      "login_failed": "Login failed!",
+      "no_account": "Don't have an account?",
+      "signup_link": "Sign Up!"
+    },
+    "signup": {
+      "title": "Welcome",
+      "subtitle": "Tempus varius a vitae interdum id\ntortor elementum tristique eleifend at.",
+      "name": "Full Name",
+      "email": "Email",
+      "password": "Password",
+      "confirm_password": "Confirm Password",
+      "terms_text": "I have read and agree to the ",
+      "terms_link": "Terms of Service",
+      "terms_end": ". Please read this agreement to continue.",
+      "signup_button": "Sign Up Now",
+      "signup_success": "Registration successful!",
+      "signup_failed": "Registration failed!",
+      "has_account": "Already have an account?",
+      "login_link": "Login!"
+    }
+  },
+  "home": {
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "retry": "Try Again"
+  },
+  "profile": {
+    "title": "Profile Details",
+    "limited_offer": "Limited Offer",
+    "user": "User",
+    "add_photo": "Add Photo",
+    "favorite_movies": "My Favorite Movies",
+    "no_favorites": "No favorite movies yet"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "cancel": "Cancel",
+    "save": "Save",
+    "delete": "Delete",
+    "edit": "Edit",
+    "back": "Back",
+    "user": "User"
+  },
+  "errors": {
+    "invalid_credentials": "Invalid email or password",
+    "general_error": "An error occurred, please try again"
+  }
+}

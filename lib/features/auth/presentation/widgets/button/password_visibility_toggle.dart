@@ -12,10 +12,12 @@ class PasswordVisibilityToggle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
     return IconButton(
       icon: Icon(
         obscureText ? Icons.visibility_off_outlined : Icons.visibility_outlined,
-        color: const Color(0xff8C8C8C),
+        color: colorScheme.onSurface.withValues(alpha: 0.5),
       ),
       onPressed: onToggle,
     );
