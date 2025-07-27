@@ -108,11 +108,12 @@ lib/
 
 
 ### Ana Sayfa
-![Home Screen]![Screenshot_20250727-112733](https://github.com/user-attachments/assets/09336570-4b30-4ad2-98e3-7c8a7480177f)
+![Home Screen](https://github.com/user-attachments/assets/09336570-4b30-4ad2-98e3-7c8a7480177f)
 
 
 ### Profil Sayfası
 ![Profile Screen](https://github.com/user-attachments/assets/77930f97-9824-4944-9ad7-6e16b196d48e)
+<img src="https://github.com/user-attachments/assets/77930f97-9824-4944-9ad7-6e16b196d48e" width=50% height=50%>
 ### Sınırlı Teklif
 ![Limited Offer](https://github.com/user-attachments/assets/da8c52f4-6a26-41f6-8557-5ab4425c38e4)
 
