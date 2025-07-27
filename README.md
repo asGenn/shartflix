@@ -95,13 +95,11 @@ lib/
 ### Uygulama iconu
 <img src="https://github.com/user-attachments/assets/b4158692-9684-41c8-92e0-c19fadc2ee73" width=25% height=25%>
 
-
 ### Splash Ekranı
-<img src="https://github.com/user-attachments/assets/824821e8-1a04-4374-b8df-dc3e100cc3fb" width=25% height=25%>
-
-
+<video src="https://github.com/user-attachments/assets/a74783a4-f9c0-4314-b1ff-73cc020c25f6" width="352" height="720"></video>
 
 ### Giriş Ekranı
+<img src="https://github.com/user-attachments/assets/dd1ef66d-fecf-4720-8c77-8d6ff0a9674a" width=25% height=25%>
 
 ### Fotoğraf Yükleme Ekranı
 <img src="https://github.com/user-attachments/assets/eab9e3f1-c124-4bc2-b870-f8ad75bd05cf" width=25% height=25%>
@@ -112,6 +110,7 @@ lib/
 
 ### Profil Sayfası
 <img src="https://github.com/user-attachments/assets/77930f97-9824-4944-9ad7-6e16b196d48e" width=25% height=25%>
+
 ### Sınırlı Teklif
 <img src="https://github.com/user-attachments/assets/da8c52f4-6a26-41f6-8557-5ab4425c38e4" width=25% height=25%>
 
@@ -119,7 +118,7 @@ lib/
 
 ## 🎬 Animasyonlar
 ### Splash Animasyonu
-(https://github.com/user-attachments/assets/a7e797bd-e787-4db0-8a8f-86b2d86b2c7d)
+![Splash](https://github.com/user-attachments/assets/a7e797bd-e787-4db0-8a8f-86b2d86b2c7d)
 
 
 
